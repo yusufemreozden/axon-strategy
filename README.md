@@ -1,5 +1,8 @@
 # 📈 AXON — Strategic Trend Detection System
 
+🛡️ Note: This repository contains a redacted version of the AXON engine.
+Key logic blocks are intentionally excluded or obfuscated to protect the strategy’s proprietary nature.
+
 AXON-ST is a precision-engineered trading strategy tailored for adaptive trend recognition and optimal trade execution.  
 Designed with a hybrid structure, the system selectively combines multiple filters, custom smoothing, and dynamic price logic to identify high-quality trading opportunities.
 
