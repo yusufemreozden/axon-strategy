@@ -1,53 +1,38 @@
 //@version=6
 
-// © 2025 Yusuf Emre ÖZDEN  | AXON Strategy
-// All rights reserved.
+// © 2025 Yusuf Emre ÖZDEN | AXON Strategy
+// All rights reserved. Core logic intentionally redacted.
 
 strategy(
   title = "AXON-ST © 2025 Yusuf Emre ÖZDEN", 
-  overlay = true, 
-  default_qty_type = strategy.percent_of_equity, 
+  overlay = true,
+  default_qty_type = strategy.percent_of_equity,
   default_qty_value = 100,
-  process_orders_on_close = true, 
-  calc_on_order_fills = true, 
-  calc_on_every_tick = false, 
-  initial_capital = 100000, 
+  process_orders_on_close = true,
+  calc_on_order_fills = true,
+  calc_on_every_tick = false,
+  initial_capital = 100000,
   currency = currency.USD)
 
-// === BACKTEST WINDOW ===
+// === BACKTEST RANGE ===
 testStart = timestamp(2019, 1, 1, 0, 0)
 testStop  = timestamp(2030, 12, 31, 0, 0)
 isInTestPeriod = time >= testStart and time <= testStop
 
-// === CORE INDICATORS (SOME REDACTED FOR IP PROTECTION) ===
+// === CORE INDICATORS (REDACTED) ===
+ma        = na  // 🔒
+ema55     = ta.sma(close, 55)  // Visual reference only
+adx       = na  // 🔒
+emaSibop  = na  // 🔒
+customTrend = na  // 🔒
 
-// -- Proprietary EMA structure --
-ema5  = na  // ta.ema(close, 5)
-ema8  = na  // ta.ema(close, 8)
-ema13 = na  // ta.ema(close, 13)
-ema21 = na  // ta.ema(close, 21)
-emaSibop = na  // original condition removed
-
-// -- Framework reference line (visual only) --
-ema55 = ta.sma(close, 55)
-plot(ema55, color=color.gray, linewidth=2)
-
-// -- Internal smoothing proxy (structure hidden) --
-ma = na  // ta.vwma(close, 59)
-
-// -- Trend strength index (placeholder only) --
-adx = na  // original ADX logic removed
-
-
-// === AI SIGNAL (REDACTED)
-// bool isBearishKrnL = ...
-
-// === BUY / SELL SIGNALS (REDACTED) ===
+// === SIGNAL ENGINE (FULLY REDACTED) ===
 var bool isBuyLast = false
-buySignal = na  // 🔒 Logic Redacted
-sellSignal = na // 🔒 Logic Redacted
 
-// === POSITION FLAGS ===
+buySignal  = false  // 🔒 Redacted logic
+sellSignal = false  // 🔒 Redacted logic
+
+// === STATE MACHINE ===
 if buySignal
     isBuyLast := true
 else if sellSignal
@@ -59,27 +44,27 @@ if buySignal and isInTestPeriod
 if sellSignal and isInTestPeriod
     strategy.close("AL", comment="SAT")
 
-// === PROFIT TARGETS ===
-per(p) => strategy.position_size != 0 ? math.round(p / 100 * strategy.position_avg_price / syminfo.mintick) : float(na)
-T1 = 15.0
-T2 = 23.7
-T3 = 33.0
-T4 = 60.0
-strategy.exit('TP1', qty_percent=10, profit=per(T1))
-strategy.exit('TP2', qty_percent=16, profit=per(T2))
-strategy.exit('TP3', qty_percent=32, profit=per(T3))
-strategy.exit('TP4', qty_percent=31, profit=per(T4))
+// === PROFIT TARGETS (REDACTED) ===
+per(p) => na  // 🔒 Hidden TP logic
 
-// === TP LEVEL PLOTTING ===
-plot(strategy.position_size > 0 ? strategy.position_avg_price * (1 + T1 / 100) : na, style=plot.style_linebr, color=#056008, title='T1')
-plot(strategy.position_size > 0 ? strategy.position_avg_price * (1 + T2 / 100) : na, style=plot.style_linebr, color=color.yellow, title='T2')
-plot(strategy.position_size > 0 ? strategy.position_avg_price * (1 + T3 / 100) : na, style=plot.style_linebr, color=color.rgb(10, 79, 136), title='T3')
-plot(strategy.position_size > 0 ? strategy.position_avg_price * (1 + T4 / 100) : na, style=plot.style_linebr, color=color.rgb(160, 142, 241), title='T4')
+strategy.exit('TP1', qty_percent=10, profit=per(0))
+strategy.exit('TP2', qty_percent=16, profit=per(0))
+strategy.exit('TP3', qty_percent=32, profit=per(0))
+strategy.exit('TP4', qty_percent=31, profit=per(0))
+
+// === TP LEVEL PLOTTING (REDACTED) ===
+plot(ema55, title="EMA55", color=color.gray, linewidth=2)
+
+plot(na, style=plot.style_linebr, title='T1')
+plot(na, style=plot.style_linebr, title='T2')
+plot(na, style=plot.style_linebr, title='T3')
+plot(na, style=plot.style_linebr, title='T4')
 
 // === SIGNAL MARKERS ===
 plotshape(buySignal, title='AL', text='AL', style=shape.labelup, size=size.large, location=location.belowbar, color=color.new(color.green, 10), textcolor=color.white)
 plotshape(sellSignal, title='SAT', text='SAT', style=shape.labeldown, size=size.large, location=location.abovebar, color=color.new(color.red, 10), textcolor=color.white)
 
-// === NOTE ===
-// Core logic and proprietary signal generation formulas have been intentionally redacted
-// to protect the integrity and intellectual property of AXON-ST.
+// === NOTICE ===
+// The entire strategic logic, filtering mechanics, signal generation,
+// and proprietary formulas are intentionally redacted to protect intellectual property.
+// This is a structural framework preview of AXON-ST by Yusuf Emre ÖZDEN.
